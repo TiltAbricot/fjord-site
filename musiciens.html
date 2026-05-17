@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musiciens — Fjord in Slovenia</title>
+    <meta name="description" content="Fjord in Slovenia cherche batteur et bassiste à Lyon. Groove en 5/4, pop européenne.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --fond: #f5f0e8;
+            --noir: #1a1a1a;
+            --gris: #6b6b6b;
+            --accent: #c0552e;
+            --accent-light: #f5e6de;
+            --blanc: #ffffff;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--fond);
+            color: var(--noir);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ── */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        nav .back {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--gris);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+        nav .back:hover { color: var(--noir); }
+        nav .back::before { content: '← '; }
+        nav .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: var(--accent-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 3px;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 70vh;
+            overflow: hidden;
+        }
+        .hero-image {
+            background: url('page musicien/photo-studio.JPG') center / cover no-repeat;
+            min-height: 400px;
+        }
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+        }
+        .hero-text .overline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .hero-text h1 {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        .hero-text p {
+            font-size: 1.05rem;
+            color: var(--gris);
+            max-width: 420px;
+        }
+        .hero-text p strong {
+            color: var(--noir);
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 4rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        section h2 + .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--gris);
+            margin-bottom: 2rem;
+        }
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: rgba(0,0,0,0.08);
+            margin: 3rem 0;
+        }
+
+        /* ── MOODBOARDS ── */
+        .moodboard-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .moodboard-card {
+            background: var(--blanc);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: start;
+        }
+        .moodboard-card .card-text h3 {
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        .moodboard-card .card-text p {
+            font-size: 0.85rem;
+            color: var(--gris);
+        }
+        .moodboard-card .card-player {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .play-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        .play-btn:hover {
+            background: var(--accent);
+        }
+        .play-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--accent);
+            margin-left: 2px;
+        }
+        .play-btn:hover svg {
+            fill: var(--blanc);
+        }
+        .duration {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--gris);
+        }
+
+        /* ── CADRE PRATIQUE ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .info-card {
+            background: var(--blanc);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        .info-card .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .info-card .value {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* ── CONTACT ── */
+        .contact-zone {
+            background: var(--noir);
+            color: var(--fond);
+            padding: 4rem 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .contact-zone h2 {
+            color: var(--fond);
+            margin-bottom: 1rem;
+        }
+        .contact-zone p {
+            color: #aaa;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            font-size: 0.95rem;
+        }
+        .btn-audition {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: var(--blanc);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .btn-audition:hover {
+            background: #a8431f;
+        }
+        .contact-zone .hint {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 1.5rem;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 2rem 3rem;
+            font-size: 0.75rem;
+            color: var(--gris);
+        }
+        footer a {
+            color: var(--gris);
+            text-decoration: none;
+        }
+        footer a:hover { color: var(--noir); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 700px) {
+            nav { padding: 1rem 1.5rem; }
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .hero-image { min-height: 250px; }
+            .hero-text { padding: 2rem 1.5rem; }
+            section { padding: 3rem 1.5rem; }
+            .contact-zone { padding: 3rem 1.5rem; }
+            .moodboard-card {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="back">Retour au site</a>
+    <span class="tag">Recrutement ouvert</span>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+    <div class="hero-image"></div>
+    <div class="hero-text">
+        <span class="overline">L'envers du décor</span>
+        <h1>On cherche la section rythmique.</h1>
+        <p>Fjord in Slovenia, c'est un projet où <strong>tout est en 5 temps</strong>. On cherche un <strong>batteur</strong> et un <strong>bassiste</strong> à Lyon pour construire un groove qui ne ressemble à rien d'autre.</p>
+    </div>
+</div>
+
+<!-- ── MOODBOARDS ── -->
+<section>
+    <h2>Direction sonore</h2>
+    <p class="subtitle">Les extraits produits — écoute avant de postuler</p>
+
+    <div class="moodboard-grid">
+        <div class="moodboard-card">
+            <div class="card-text">
+                <h3>Morceau 1 — Titre à venir</h3>
+                <p>Description de la direction attendue, l'intention du morceau, ce qu'on cherche comme groove.</p>
+            </div>
+            <div class="card-player">
+                <button class="play-btn" aria-label="Écouter">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <span class="duration">0:35</span>
+            </div>
+        </div>
+
+        <div class="moodboard-card">
+            <div class="card-text">
+                <h3>Morceau 2 — Titre à venir</h3>
+                <p>Description de la direction attendue, l'intention du morceau, ce qu'on cherche comme interprétation.</p>
+            </div>
+            <div class="card-player">
+                <button class="play-btn" aria-label="Écouter">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <span class="duration">0:40</span>
+            </div>
+        </div>
+
+        <div class="moodboard-card">
+            <div class="card-text">
+                <h3>Morceau 3 — Titre à venir</h3>
+                <p>Description de la direction attendue, le feeling recherché sur ce titre.</p>
+            </div>
+            <div class="card-player">
+                <button class="play-btn" aria-label="Écouter">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <span class="duration">0:32</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider" style="max-width: 800px; margin: 0 auto;"></div>
+
+<!-- ── CADRE PRATIQUE ── -->
+<section>
+    <h2>Cadre pratique</h2>
+    <p class="subtitle">Ce qu'il faut savoir avant de nous écrire</p>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="label">Localisation</div>
+            <div class="value">Lyon et alentours</div>
+        </div>
+        <div class="info-card">
+            <div class="label">Rythme</div>
+            <div class="value">1 répétition / semaine</div>
+        </div>
+        <div class="info-card">
+            <div class="label">Objectif</div>
+            <div class="value">Concerts live en Europe</div>
+        </div>
+        <div class="info-card">
+            <div class="label">Exigence</div>
+            <div class="value">Groove en 5/4, interprétation</div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CONTACT AUDITION ── -->
+<div class="contact-zone">
+    <h2>Ça te parle ?</h2>
+    <p>Envoie-nous tes références : liens d'écoute, vidéos, ce que tu veux. On se rencontre ensuite autour d'un café et d'un 5 temps.</p>
+    <a href="mailto:contact@fjordinslovenia.eu?subject=Audition%20—%20Fjord%20in%20Slovenia" class="btn-audition">Proposer une audition</a>
+    <p class="hint">Batteur, bassiste, ou profil atypique — on écoute tout.</p>
+</div>
+
+<footer>
+    <p><a href="index.html">Fjord in Slovenia</a> &middot; Lyon, France &middot; 2025</p>
+</footer>
+
+</body>
+</html>

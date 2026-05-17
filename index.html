@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fjord in Slovenia</title>
+    <meta name="description" content="Fjord in Slovenia — Groove 100% en 5 temps. Projet musical européen, Lyon.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --noir: #0a0a0c;
+            --blanc: #f0ede8;
+            --gris: #8a8a8a;
+            --accent: #c4a882;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--noir);
+            color: var(--blanc);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(to bottom, rgba(10,10,12,0.9), transparent);
+        }
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        nav .nav-links a {
+            color: var(--gris);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        nav .nav-links a:hover { color: var(--blanc); }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 3rem;
+            overflow: hidden;
+        }
+
+        /* Titre au-dessus de la bande */
+        .hero-title {
+            position: relative;
+            z-index: 3;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 700;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            text-align: center;
+            margin-bottom: -0.15em;
+        }
+
+        /* Bande photo cinématique */
+        .hero-strip {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 900px;
+            height: clamp(180px, 30vh, 320px);
+            overflow: hidden;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .hero-strip img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            filter: brightness(0.8) saturate(0.75);
+            display: block;
+            transform: scale(1.5) translateY(-12%);
+        }
+        .hero-strip::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to right, var(--noir) 0%, transparent 15%, transparent 85%, var(--noir) 100%),
+                radial-gradient(ellipse at 50% 50%, rgba(180, 100, 40, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Tagline sous la bande */
+        .hero-tagline {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .hero-tagline p {
+            font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+            font-weight: 300;
+            color: var(--gris);
+            letter-spacing: 0.05em;
+        }
+        .hero-tagline em {
+            color: var(--blanc);
+            font-style: normal;
+            font-weight: 400;
+        }
+        .hero-tagline .five {
+            display: inline-block;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            color: var(--accent);
+            font-weight: 700;
+            margin: 0 0.1em;
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 5rem 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        section h2::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin-top: 0.75rem;
+        }
+
+        /* ── VIDEO ── */
+        .video-section {
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #111;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .video-wrapper .placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gris);
+            font-size: 0.9rem;
+            border: 1px solid #222;
+            border-radius: 4px;
+        }
+
+        /* ── DATES ── */
+        .dates-list {
+            list-style: none;
+        }
+        .dates-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .dates-list .date-info {
+            display: flex;
+            gap: 1.5rem;
+            align-items: baseline;
+        }
+        .dates-list .date-str {
+            font-variant-numeric: tabular-nums;
+            color: var(--gris);
+            font-size: 0.85rem;
+            min-width: 100px;
+        }
+        .dates-list .date-lieu {
+            font-size: 0.95rem;
+        }
+        .dates-list .date-year {
+            color: var(--gris);
+            font-size: 0.8rem;
+        }
+        .year-separator {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--accent);
+            padding: 1.5rem 0 0.5rem;
+            border: none;
+        }
+
+        /* ── CONTACT ── */
+        .contact-section {
+            text-align: center;
+            padding: 6rem 3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact-section p {
+            color: var(--gris);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            border: 1px solid var(--blanc);
+            color: var(--blanc);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: var(--blanc);
+            color: var(--noir);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gris);
+            font-size: 0.75rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        footer a {
+            color: var(--gris);
+            text-decoration: none;
+        }
+        footer a:hover { color: var(--blanc); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            nav { padding: 1rem 1.5rem; }
+            .hero { padding: 3rem 1.5rem; }
+            section { padding: 3rem 1.5rem; }
+            .video-section { padding: 2rem 1.5rem; }
+            .contact-section { padding: 4rem 1.5rem; }
+            .dates-list li { flex-direction: column; gap: 0.2rem; }
+            .dates-list .date-info { flex-direction: column; gap: 0.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">Fjord in Slovenia</div>
+    <ul class="nav-links">
+        <li><a href="#live">Live</a></li>
+        <li><a href="#dates">Dates</a></li>
+        <li><a href="#contact">Booking</a></li>
+        <li><a href="musiciens.html">Musiciens</a></li>
+    </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+    <h1 class="hero-title">Fjord in Slovenia</h1>
+    <div class="hero-strip">
+        <img src="photo-artiste.jpg" alt="Fjord in Slovenia">
+    </div>
+    <div class="hero-tagline">
+        <p>Un projet musical où tout est en <span class="five">5</span> temps</p>
+    </div>
+</div>
+
+<!-- ── VIDEO ── -->
+<section class="video-section" id="live">
+    <h2>Live</h2>
+    <div class="video-wrapper">
+        <div class="placeholder">
+            <!-- Remplacer par une iframe YouTube/Vimeo -->
+            Vidéo live — à intégrer
+        </div>
+    </div>
+</section>
+
+<!-- ── DATES ── -->
+<section id="dates">
+    <h2>Dates passées</h2>
+    <ul class="dates-list" id="dates-list"></ul>
+</section>
+
+<!-- ── CONTACT ── -->
+<div class="contact-section" id="contact">
+    <h2>Booking</h2>
+    <p>Pour une date, une collaboration, ou juste dire bonjour.</p>
+    <a href="mailto:contact@fjordinslovenia.eu" class="btn">Nous contacter</a>
+</div>
+
+<footer>
+    <p>&copy; 2025 Fjord in Slovenia &middot; Lyon, France &middot; <a href="musiciens.html">Rejoindre le projet</a></p>
+</footer>
+
+<script>
+const dates = [
+  {"date": "2021-08-14", "lieu": "Stream"},
+  {"date": "2021-09-02", "lieu": "Taratatouille, Agend\u2019art"},
+  {"date": "2021-09-26", "lieu": "Munich"},
+  {"date": "2022-09-02", "lieu": "Taratatouille, Agend\u2019art"},
+  {"date": "2022-11-03", "lieu": "Taratatouille, Agend\u2019art"},
+  {"date": "2022-12-01", "lieu": "Taratatouille, Agend\u2019art"},
+  {"date": "2023-02-02", "lieu": "Jack Jack"},
+  {"date": "2023-03-02", "lieu": "Taratatouille, Agend\u2019art"},
+  {"date": "2023-04-06", "lieu": "Jack Jack"},
+  {"date": "2023-07-23", "lieu": "Le Clipper"},
+  {"date": "2023-11-13", "lieu": "Taratatouille, Agend\u2019art"},
+  {"date": "2024-06-29", "lieu": "Chassieu, La Grande Estivale"},
+  {"date": "2024-09-06", "lieu": "Sc\u00e8ne ouverte, Bazar aux 1000 Vies, Saint-Genis-Laval"},
+  {"date": "2024-09-27", "lieu": "Sc\u00e8ne ouverte \u00e0 L\u2019Officine"},
+  {"date": "2024-10-03", "lieu": "Taratatouille, Agend\u2019art"},
+  {"date": "2024-10-04", "lieu": "Sc\u00e8ne ouverte, Bazar aux 1000 Vies, Saint-Genis-Laval"},
+  {"date": "2024-10-16", "lieu": "Sc\u00e8ne ouverte au Smoking Dog, Lyon 5e"},
+  {"date": "2024-10-17", "lieu": "Sc\u00e8ne ouverte \u00e0 Mornant, Le Jamais Vu"},
+  {"date": "2024-11-06", "lieu": "Sc\u00e8ne ouverte, Le Temps des Noyaux, Bourg-en-Bresse"},
+  {"date": "2024-11-07", "lieu": "Taratatouille, Agend\u2019art"},
+  {"date": "2024-11-08", "lieu": "Sc\u00e8ne ouverte, Quai 472, Villefranche-sur-Sa\u00f4ne"},
+  {"date": "2024-11-14", "lieu": "New Note, Monplaisir"},
+  {"date": "2024-11-29", "lieu": "MJC Chaponost"},
+  {"date": "2025-01-10", "lieu": "Sc\u00e8ne ouverte, Quai 472, Villefranche-sur-Sa\u00f4ne"},
+  {"date": "2025-01-26", "lieu": "Aperozik"},
+  {"date": "2025-01-31", "lieu": "OGVZ au MCC Pop Corn, Bourg-en-Bresse"},
+  {"date": "2025-02-07", "lieu": "Taratatouille, Agend\u2019art"},
+  {"date": "2025-02-08", "lieu": "Sc\u00e8ne ouverte, Bazar aux 1000 Vies, Saint-Genis-Laval"},
+  {"date": "2025-02-09", "lieu": "Concert en appartement"},
+  {"date": "2025-02-14", "lieu": "Sc\u00e8ne ouverte, MJC Sans Souci"},
+  {"date": "2025-02-20", "lieu": "Sc\u00e8ne ouverte, MJC Saint-Just"},
+  {"date": "2025-03-14", "lieu": "Sc\u00e8ne ouverte, Quai 472, Villefranche-sur-Sa\u00f4ne"},
+  {"date": "2025-11-02", "lieu": "Aperozik"}
+];
+
+dates.sort((a, b) => b.date.localeCompare(a.date));
+
+const list = document.getElementById('dates-list');
+let currentYear = null;
+
+dates.forEach(d => {
+    const [y, m, day] = d.date.split('-');
+    const year = parseInt(y);
+
+    if (year !== currentYear) {
+        currentYear = year;
+        const sep = document.createElement('li');
+        sep.className = 'year-separator';
+        sep.textContent = year;
+        list.appendChild(sep);
+    }
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+        <div class="date-info">
+            <span class="date-str">${day}/${m}/${y}</span>
+            <span class="date-lieu">${d.lieu}</span>
+        </div>
+    `;
+    list.appendChild(li);
+});
+</script>
+
+</body>
+</html>
