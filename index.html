@@ -224,26 +224,83 @@
 
         /* ── CONTACT ── */
         .contact-section {
-            text-align: center;
             padding: 6rem 3rem;
             max-width: 600px;
             margin: 0 auto;
         }
-        .contact-section p {
+        .contact-section > p {
             color: var(--gris);
             margin-bottom: 2rem;
             font-size: 1rem;
+            text-align: center;
+        }
+        .contact-section h2 {
+            text-align: center;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .contact-form label {
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gris);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 3px;
+            padding: 0.8rem 1rem;
+            color: var(--blanc);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .contact-form select {
+            appearance: none;
+            cursor: pointer;
+        }
+        .contact-form select option {
+            background: var(--noir);
+            color: var(--blanc);
+        }
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+        .contact-form .ohnohoney {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+            height: 0;
+            width: 0;
+            overflow: hidden;
         }
         .btn {
             display: inline-block;
             padding: 1rem 3rem;
             border: 1px solid var(--blanc);
             color: var(--blanc);
-            text-decoration: none;
+            background: transparent;
             font-size: 0.85rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
+            cursor: pointer;
             transition: all 0.3s;
+            align-self: center;
         }
         .btn:hover {
             background: var(--blanc);
@@ -281,10 +338,10 @@
 <nav>
     <div class="logo">Fjord in Slovenia</div>
     <ul class="nav-links">
-        <li><a href="#live">Live</a></li>
+        <li><a href="#live">Écouter</a></li>
         <li><a href="#dates">Dates</a></li>
         <li><a href="#contact">Booking</a></li>
-        <li><a href="musiciens.html">Musiciens</a></li>
+        <!-- <li><a href="musiciens.html">Musiciens</a></li> -->
     </ul>
 </nav>
 
@@ -301,13 +358,8 @@
 
 <!-- ── VIDEO ── -->
 <section class="video-section" id="live">
-    <h2>Live</h2>
-    <div class="video-wrapper">
-        <div class="placeholder">
-            <!-- Remplacer par une iframe YouTube/Vimeo -->
-            Vidéo live — à intégrer
-        </div>
-    </div>
+    <h2>Écouter</h2>
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F2331646460&color=%23c4a882&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
 </section>
 
 <!-- ── DATES ── -->
@@ -318,13 +370,39 @@
 
 <!-- ── CONTACT ── -->
 <div class="contact-section" id="contact">
-    <h2>Booking</h2>
-    <p>Pour une date, une collaboration, ou juste dire bonjour.</p>
-    <a href="mailto:contact@fjordinslovenia.eu" class="btn">Nous contacter</a>
+    <h2>Contact</h2>
+    <p>Pour concerts, collaborations, musiciens ou demandes de booking, utilisez le formulaire ci-dessous.</p>
+    <form class="contact-form" action="https://formspree.io/f/xgoqgvoe" method="POST">
+        <!-- Honeypot anti-spam -->
+        <input type="text" name="_gotcha" class="ohnohoney" tabindex="-1" autocomplete="off">
+        <label>
+            Nom
+            <input type="text" name="name" required>
+        </label>
+        <label>
+            Email
+            <input type="email" name="email" required>
+        </label>
+        <label>
+            Sujet
+            <select name="subject" required>
+                <option value="" disabled selected>Type de demande</option>
+                <option value="booking">Booking / Concert</option>
+                <option value="collaboration">Collaboration</option>
+                <option value="musicien">Rejoindre le projet</option>
+                <option value="autre">Autre</option>
+            </select>
+        </label>
+        <label>
+            Message
+            <textarea name="message" required></textarea>
+        </label>
+        <button type="submit" class="btn">Envoyer</button>
+    </form>
 </div>
 
 <footer>
-    <p>&copy; 2025 Fjord in Slovenia &middot; Lyon, France &middot; <a href="musiciens.html">Rejoindre le projet</a></p>
+    <p>&copy; 2025 Fjord in Slovenia &middot; Lyon, France</p>
 </footer>
 
 <script>
