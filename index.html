@@ -213,6 +213,19 @@
             color: var(--gris);
             font-size: 0.8rem;
         }
+        .concert-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+            width: 100%;
+            margin-top: 0.8rem;
+        }
+        .concert-media img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 4px;
+            object-fit: cover;
+        }
         .year-separator {
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
@@ -348,7 +361,7 @@
 <div class="hero">
     <h1 class="hero-title">Fjord in Slovenia</h1>
     <div class="hero-strip">
-        <img src="photo-artiste-cropped.jpg" alt="Fjord in Slovenia">
+        <img src="https://faille-ouverte.fjordinslovenia.eu/api/public/fragment-media/8" alt="Fjord in Slovenia">
     </div>
     <div class="hero-tagline">
         <p>Un projet musical où tout est en <span class="five">5</span> temps</p>
@@ -475,6 +488,21 @@ dates.forEach(d => {
             <span class="date-lieu">${d.titre ?? d.lieu}</span>
         </div>
     `;
+    const imageMedia = (d.fragments ?? [])
+        .flatMap(fragment => fragment.media ?? [])
+        .filter(media => media.type?.startsWith('image/'));
+    if (imageMedia.length) {
+        const gallery = document.createElement('div');
+        gallery.className = 'concert-media';
+        imageMedia.forEach(media => {
+            const image = document.createElement('img');
+            image.src = media.url;
+            image.alt = media.nom || `Photo du concert ${d.titre ?? d.lieu}`;
+            image.loading = 'lazy';
+            gallery.appendChild(image);
+        });
+        li.appendChild(gallery);
+    }
     list.appendChild(li);
 });
 }
