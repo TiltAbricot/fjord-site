@@ -113,13 +113,6 @@
             color: var(--gris);
             margin-bottom: 2rem;
         }
-        .divider {
-            width: 100%;
-            height: 1px;
-            background: rgba(0,0,0,0.08);
-            margin: 3rem 0;
-        }
-
         /* ── MOODBOARDS ── */
         .moodboard-grid {
             display: grid;
@@ -138,10 +131,6 @@
         .moodboard-card .card-text h3 {
             font-size: 1rem;
             margin-bottom: 0.4rem;
-        }
-        .moodboard-card .card-text p {
-            font-size: 0.85rem;
-            color: var(--gris);
         }
         .moodboard-card .card-player {
             display: flex;
@@ -185,31 +174,6 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem;
             color: var(--gris);
-        }
-
-        /* ── CADRE PRATIQUE ── */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-        .info-card {
-            background: var(--blanc);
-            border: 1px solid rgba(0,0,0,0.06);
-            border-radius: 8px;
-            padding: 1.5rem;
-        }
-        .info-card .label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--accent);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-        .info-card .value {
-            font-size: 0.95rem;
-            font-weight: 500;
         }
 
         /* ── CONTACT ── */
@@ -294,8 +258,8 @@
     <div class="hero-image"></div>
     <div class="hero-text">
         <span class="overline">L'envers du décor</span>
-        <h1>On cherche la section rythmique.</h1>
-        <p>Fjord in Slovenia, c'est un projet où <strong>tout est en 5 temps</strong>. On cherche un <strong>batteur</strong> et un <strong>bassiste</strong> à Lyon pour construire un groove qui ne ressemble à rien d'autre.</p>
+        <h1>On cherche un batteur, un bassiste, un guitariste et un claviériste près de Lyon.</h1>
+        <p>Fjord in Slovenia, c'est un projet où <strong>tout est en 5 temps</strong>, avec l'envie de construire un son qui ne ressemble à rien d'autre.</p>
     </div>
 </div>
 
@@ -309,39 +273,12 @@
     </div>
 </section>
 
-<div class="divider" style="max-width: 800px; margin: 0 auto;"></div>
-
-<!-- ── CADRE PRATIQUE ── -->
-<section>
-    <h2>Cadre pratique</h2>
-    <p class="subtitle">Ce qu'il faut savoir avant de nous écrire</p>
-
-    <div class="info-grid">
-        <div class="info-card">
-            <div class="label">Localisation</div>
-            <div class="value">Lyon et alentours</div>
-        </div>
-        <div class="info-card">
-            <div class="label">Rythme</div>
-            <div class="value">1 répétition / semaine</div>
-        </div>
-        <div class="info-card">
-            <div class="label">Objectif</div>
-            <div class="value">Concerts live en Europe</div>
-        </div>
-        <div class="info-card">
-            <div class="label">Exigence</div>
-            <div class="value">Groove en 5/4, interprétation</div>
-        </div>
-    </div>
-</section>
-
 <!-- ── CONTACT AUDITION ── -->
 <div class="contact-zone">
     <h2>Ça te parle ?</h2>
     <p>Envoie-nous tes références : liens d'écoute, vidéos, ce que tu veux. On se rencontre ensuite autour d'un café et d'un 5 temps.</p>
     <a href="index.html#contact" class="btn-audition">Proposer une audition</a>
-    <p class="hint">Batteur, bassiste, ou profil atypique — on écoute tout.</p>
+    <p class="hint">Batteur, bassiste, guitariste, claviériste ou profil atypique — on écoute tout.</p>
 </div>
 
 <footer>
@@ -383,9 +320,7 @@ async function loadMoodboards() {
             text.className = 'card-text';
             const title = document.createElement('h3');
             title.textContent = fragment.titre.replace(/^Mood for /, '');
-            const description = document.createElement('p');
-            description.textContent = 'Une direction sonore en cours de développement.';
-            text.append(title, description);
+            text.appendChild(title);
 
             const player = document.createElement('div');
             player.className = 'card-player';
