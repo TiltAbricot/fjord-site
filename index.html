@@ -215,16 +215,59 @@
         }
         .concert-media {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, 96px);
+            justify-content: end;
             gap: 0.75rem;
-            width: 100%;
-            margin-top: 0.8rem;
+            margin-left: auto;
+        }
+        .concert-media button {
+            display: block;
+            padding: 0;
+            border: 0;
+            border-radius: 4px;
+            background: none;
+            cursor: zoom-in;
         }
         .concert-media img {
+            display: block;
             width: 100%;
             aspect-ratio: 4 / 3;
             border-radius: 4px;
             object-fit: cover;
+        }
+        .concert-media button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+        .image-lightbox {
+            width: min(92vw, 1200px);
+            max-width: none;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            overflow: visible;
+        }
+        .image-lightbox::backdrop {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        .image-lightbox img {
+            display: block;
+            max-width: 100%;
+            max-height: 88vh;
+            margin: auto;
+            border-radius: 4px;
+            object-fit: contain;
+        }
+        .image-lightbox button {
+            position: absolute;
+            top: -2.5rem;
+            right: 0;
+            padding: 0.25rem 0.5rem;
+            border: 0;
+            background: transparent;
+            color: var(--blanc);
+            font: inherit;
+            cursor: pointer;
         }
         .year-separator {
             font-family: 'Playfair Display', serif;
@@ -342,6 +385,12 @@
             .contact-section { padding: 4rem 1.5rem; }
             .dates-list li { flex-direction: column; gap: 0.2rem; }
             .dates-list .date-info { flex-direction: column; gap: 0.2rem; }
+            .concert-media {
+                justify-content: start;
+                width: 100%;
+                margin-top: 0.6rem;
+                margin-left: 0;
+            }
         }
     </style>
 </head>
@@ -495,16 +544,47 @@ dates.forEach(d => {
         const gallery = document.createElement('div');
         gallery.className = 'concert-media';
         imageMedia.forEach(media => {
+            const trigger = document.createElement('button');
+            trigger.type = 'button';
+            trigger.setAttribute('aria-label', `Agrandir ${media.nom || 'la photo du concert'}`);
             const image = document.createElement('img');
             image.src = media.url;
             image.alt = media.nom || `Photo du concert ${d.titre ?? d.lieu}`;
             image.loading = 'lazy';
-            gallery.appendChild(image);
+            trigger.appendChild(image);
+            trigger.addEventListener('click', () => openImageLightbox(media.url, image.alt));
+            gallery.appendChild(trigger);
         });
         li.appendChild(gallery);
     }
     list.appendChild(li);
 });
+}
+
+function openImageLightbox(src, alt) {
+    let lightbox = document.getElementById('image-lightbox');
+    if (!lightbox) {
+        lightbox = document.createElement('dialog');
+        lightbox.id = 'image-lightbox';
+        lightbox.className = 'image-lightbox';
+
+        const closeButton = document.createElement('button');
+        closeButton.type = 'button';
+        closeButton.textContent = 'Fermer ×';
+        closeButton.addEventListener('click', () => lightbox.close());
+
+        const fullImage = document.createElement('img');
+        lightbox.append(closeButton, fullImage);
+        lightbox.addEventListener('click', event => {
+            if (event.target === lightbox) lightbox.close();
+        });
+        document.body.appendChild(lightbox);
+    }
+
+    const fullImage = lightbox.querySelector('img');
+    fullImage.src = src;
+    fullImage.alt = alt;
+    lightbox.showModal();
 }
 
 renderDates();
