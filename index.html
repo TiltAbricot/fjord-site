@@ -405,7 +405,7 @@
 </footer>
 
 <script>
-const dates = [
+const fallbackDates = [
   {"date": "2021-08-14", "lieu": "Stream"},
   {"date": "2021-09-02", "lieu": "Taratatouille, Agend\u2019art"},
   {"date": "2021-09-26", "lieu": "Munich"},
@@ -441,6 +441,16 @@ const dates = [
   {"date": "2025-11-02", "lieu": "Aperozik"}
 ];
 
+async function renderDates() {
+let dates = fallbackDates;
+try {
+    const response = await fetch('/api/concerts', { headers: { 'Accept': 'application/json' } });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    dates = await response.json();
+} catch (error) {
+    console.warn('API concerts indisponible, utilisation des dates de secours.', error);
+}
+
 dates.sort((a, b) => b.date.localeCompare(a.date));
 
 const list = document.getElementById('dates-list');
@@ -462,11 +472,14 @@ dates.forEach(d => {
     li.innerHTML = `
         <div class="date-info">
             <span class="date-str">${day}/${m}/${y}</span>
-            <span class="date-lieu">${d.lieu}</span>
+            <span class="date-lieu">${d.titre ?? d.lieu}</span>
         </div>
     `;
     list.appendChild(li);
 });
+}
+
+renderDates();
 </script>
 
 </body>
